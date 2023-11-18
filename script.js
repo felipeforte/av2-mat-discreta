@@ -67,8 +67,23 @@ function checarEstado(placa) {
         ["NUH","NUL"],
         ["RZA","RZD"],
         // Amapá, 14-16
-        ["NEI","NFB"]
-        ["QLN","QLT"]
+        ["NEI","NFB"],
+        ["QLN","QLT"],
         ["SAK","SAM"]
-    ]
+    ];
+    
+    for (let i=0;i<intervalos.length;i++) {
+        if (placa.substring(0,3) >= intervalos[i][0] && placa.substring(0,3) <= intervalos[i][1]) {
+            if (i < 11) {
+                console.log("Pará");
+                break;
+            } else if (i < 14) {
+                console.log("Roraima");
+                break;
+            } else {
+                console.log("Amapá");
+                break;
+            }
+        }
+    }
 }
