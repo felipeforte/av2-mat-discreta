@@ -3,25 +3,26 @@ function retornaValor(hi, hf) {
     let valor = 0;
     let horario_inicial = hi.split(":");
     let horario_final = hf.split(":");
-    let diff = [];
-    diff.push(horario_final[0]-horario_inicial[0]);
-    diff.push(horario_final[1]-horario_inicial[1]);
+    let horas = 0;
+    let minutos = 0.0;
+    horas += horario_final[0]-horario_inicial[0];
+    minutos += horario_final[1]-horario_inicial[1];
 
     // Tratando o caso do minuto inicial ser maior que o final, e.g.: "07:51", "19:15"
-    if (diff[1]<0) {
-        diff[0]--;
-        diff[1] += 60;
+    if (minutos<0) {
+        horas--;
+        minutos += 60;
     }
 
     // Considerando de 15 minutos até 3h R$ 5,00 e a partir daí R$ 2,50 por hora ou fração
-    if (diff[0]>0) {
-        if (diff[0]<3) {
+    if (horas>0) {
+        if (horas<3) {
             valor += 5;
         } else {
-            valor += 5 + ((diff[0]-3) + (diff[1]>0)) * 2.5;
+            valor += 5 + Math.ceil((horas-3) + (minutos/60)) * 2.5;
         }
     } else {
-        if (diff[1]>15) {
+        if (minutos>15) {
             valor += 5;
         }
     }
